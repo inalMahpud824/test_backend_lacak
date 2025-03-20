@@ -12,12 +12,4 @@ public class GeonameDTO {
   private Double latitude;
   private Double longitude;
   private Double score;
-
-  public static GeonameDTO fromEntity(GeoName entity, Double score) {
-    String fullName = entity.getName();
-    if (entity.getCountryCode() != null && entity.getAdmin1() != null) {
-      fullName += ", " + entity.getAdmin1() + ", " + entity.getCountryCode();
-    }
-    return new GeonameDTO(fullName, entity.getLatitude(), entity.getLongitude(), score);
-  }
 }

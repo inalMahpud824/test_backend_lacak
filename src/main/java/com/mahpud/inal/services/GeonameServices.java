@@ -29,7 +29,8 @@ public class GeonameServices {
 
       if (latitude == null || longitude == null) {
         nameScore = Math.round(nameScore * 10) / 10.0;
-        return new GeonameDTO(g.getName(), g.getLatitude(), g.getLongitude(), nameScore);
+        return new GeonameDTO(g.getName() + ", " + g.getAdmin1() + ", " + g.getCountryCode(), g.getLatitude(),
+            g.getLongitude(), nameScore);
       }
 
       double locationScore = 1 - ((Math.abs(g.getLatitude() - latitude) + Math.abs(g.getLongitude() - longitude)) / 10);
@@ -38,7 +39,8 @@ public class GeonameServices {
       double finalScore = (0.7 * nameScore) + (0.3 * locationScore);
       finalScore = Math.round(finalScore * 10) / 10.0; // Satu angka di belakang koma
 
-      return new GeonameDTO(g.getName(), g.getLatitude(), g.getLongitude(), finalScore);
+      return new GeonameDTO(g.getName() + ", " + g.getAdmin1() + ", " + g.getCountryCode(), g.getLatitude(),
+          g.getLongitude(), finalScore);
     }).sorted((a, b) -> Double.compare(b.getScore(), a.getScore())) // Sort dari terbesar ke terkecil
         .collect(Collectors.toList());
 
